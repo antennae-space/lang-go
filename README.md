@@ -4,6 +4,7 @@ The Go language pack of [Web IDE](https://github.com/antennae-space/web-ide): th
 
 ## What it needs
 
+- **Install from the IDE**: a Go file without gopls shows a banner, *Install gopls* (also in *Settings → Plugins*): the IDE runs `go install golang.org/x/tools/gopls@latest` in a console, into its own folder (`~/.local/share/web-ide/tools/lang-go`). You need Go.
 - **gopls** on your PATH (`go install golang.org/x/tools/gopls@latest`).
 - The IDE runs it **confined**: it reads your project (not write), your Go toolchain (`GOROOT`: `$GOROOT`, the folder of the `go` on your PATH, `/usr/local/go`…) and your module cache (`GOMODCACHE`), keeps its caches in its own folder, and has no network (`GOTOOLCHAIN=local`, `GOPROXY=off`: download the modules of a project with `go mod download` in a terminal).
 - On a project over SSH, gopls runs on its host, as you installed it there.

@@ -1,32 +1,74 @@
 {
-  "$schema": "https://raw.githubusercontent.com/antennae-space/plugin-sdk/v1.5.0/plugin.schema.json",
+  "$schema": "https://raw.githubusercontent.com/antennae-space/plugin-sdk/v1.8.0/plugin.schema.json",
   "id": "lang-go",
   "name": "Go",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "apiVersion": 1,
   "ide": ">=1.24.0 <2",
   "assets": "https://github.com/antennae-space/lang-go/releases/download/v{version}/lang-go-{arch}.tar.gz",
-  "permissions": ["program:gopls", "path:GOROOT", "path:GOMODCACHE"],
+  "permissions": [
+    "program:gopls",
+    "path:GOROOT",
+    "path:GOMODCACHE"
+  ],
   "contributes": {
     "languages": [
       {
         "id": "go",
         "name": "Go",
-        "extensions": [".go"],
-        "markers": ["go.mod", "go.work"],
+        "extensions": [
+          ".go"
+        ],
+        "markers": [
+          "go.mod",
+          "go.work"
+        ],
         "grammar": "grammars/go.json",
         "servers": [
           {
-            "argv": ["gopls"],
-            "paths": [
-              { "name": "GOROOT", "candidates": ["$GOROOT", "@go/../..", "/usr/local/go", "/usr/lib/go", "~/sdk/go"], "env": true },
-              { "name": "GOMODCACHE", "candidates": ["$GOMODCACHE", "$GOPATH/pkg/mod", "~/go/pkg/mod"], "env": true }
+            "argv": [
+              "gopls"
             ],
-            "pathDirs": ["GOROOT/bin"],
-            "env": { "GOTOOLCHAIN": "local", "GOPROXY": "off" }
+            "paths": [
+              {
+                "name": "GOROOT",
+                "candidates": [
+                  "$GOROOT",
+                  "@go/../..",
+                  "/usr/local/go",
+                  "/usr/lib/go",
+                  "~/sdk/go"
+                ],
+                "env": true
+              },
+              {
+                "name": "GOMODCACHE",
+                "candidates": [
+                  "$GOMODCACHE",
+                  "$GOPATH/pkg/mod",
+                  "~/go/pkg/mod"
+                ],
+                "env": true
+              }
+            ],
+            "pathDirs": [
+              "GOROOT/bin"
+            ],
+            "env": {
+              "GOTOOLCHAIN": "local",
+              "GOPROXY": "off"
+            },
+            "install": {
+              "manager": "go",
+              "packages": [
+                "golang.org/x/tools/gopls@latest"
+              ]
+            }
           }
         ],
-        "tests": { ".go": "{name}_test.go" }
+        "tests": {
+          ".go": "{name}_test.go"
+        }
       }
     ]
   }
